@@ -25,7 +25,7 @@ AppAsset::register($this);
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => 'My Company',
+                'brandLabel' => 'Помогатор 9000',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',
@@ -33,6 +33,11 @@ AppAsset::register($this);
             ]);
             $menuItems = [
                 ['label' => 'Home', 'url' => ['/site/index']],
+                ['label' => 'Программы', 'url' => ['/programs']],
+                ['label' => 'Проекты', 'url' => ['/projects']],
+                ['label' => 'Типы', 'url' => ['/types']],
+                ['label' => 'Новости', 'url' => ['/news']],
+                ['label' => 'Подписчики', 'url' => ['/subscribers']],
             ];
             if (Yii::$app->user->isGuest) {
                 $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
