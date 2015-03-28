@@ -39,6 +39,9 @@ AppAsset::register($this);
                 ['label' => 'Новости', 'url' => ['/news']],
                 ['label' => 'Подписчики', 'url' => ['/subscribers']],
             ];
+//            if (\common\models\User::STATUS_ADMIN != Yii::$app->user->identity->status) {
+                $menuItems[] = ['label' => 'Пользователи', 'url' => ['/users']];
+//            }
             if (Yii::$app->user->isGuest) {
                 $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
             } else {

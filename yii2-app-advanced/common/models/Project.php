@@ -5,6 +5,8 @@ namespace common\models;
 use backend\models\Program;
 use backend\models\Type;
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "projects".
@@ -27,6 +29,9 @@ use Yii;
  */
 class Project extends \yii\db\ActiveRecord
 {
+    const PROJECT_ACTIVE = 10;
+    const PROJECT_COMPLETED = 20;
+
     /**
      * @inheritdoc
      */
@@ -38,13 +43,30 @@ class Project extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+            [
+                'class' => \common\behaviors\ManyToManyBehavior::className(),
+                'relations' => [
+                    'types_list' => 'types',
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
-            [['title', 'created_at', 'updated_at'], 'required'],
+            [['title'], 'required'],
             [['content', 'description'], 'string'],
-            [['status', 'author_id', 'program_id', 'created_at', 'updated_at'], 'integer'],
-            [['title'], 'string', 'max' => 255]
+            [['status', 'author_id', 'program_id'], 'integer'],
+            [['title'], 'string', 'max' => 255],
+            [['types_list'], 'safe']
         ];
     }
 
@@ -58,11 +80,8 @@ class Project extends \yii\db\ActiveRecord
             'title' => 'Title',
             'content' => 'Content',
             'description' => 'Description',
-            'status' => 'Status',
-            'author_id' => 'Author ID',
-            'program_id' => 'Program ID',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'program_id' => 'Программа',
+            'types_list' => 'Типы помощи',
         ];
     }
 
@@ -77,7 +96,7 @@ class Project extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPrograms()
+    public function getProgram()
     {
         return $this->hasOne(Program::className(), ['id' => 'program_id']);
     }
@@ -96,7 +115,8 @@ class Project extends \yii\db\ActiveRecord
      */
     public function getTypes()
     {
-        return $this->hasMany(Type::className(), ['project_id' => 'id']);
+        return $this->hasMany(Type::className(), ['id' => 'type_id'])
+            ->viaTable('project_type', ['project_id' => 'id']);
     }
 
     /**
@@ -105,5 +125,56 @@ class Project extends \yii\db\ActiveRecord
     public function getAuthor()
     {
         return $this->hasOne(User::className(), ['id' => 'author_id']);
+    }
+
+    /**
+     * @return array
+     */
+    public function getProgramsList()
+    {
+        return ArrayHelper::map(Program::find()->asArray()->all(), 'id', 'title');
+    }
+
+    /**
+     * @return array
+     */
+    public function getTypesList()
+    {
+        return ArrayHelper::map(Type::find()->asArray()->all(), 'id', 'title');
+    }
+
+    /**
+     * @return string
+     */
+    public function getTextStatus()
+    {
+        $status = 'Активен';
+       if ( $this::PROJECT_ACTIVE == $this->status ) {
+            $status = 'Активен';
+        } elseif ($this::PROJECT_COMPLETED == $this->status ) {
+            $status = 'Завершён';
+        }
+
+        return $status;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthorName()
+    {
+        $user = $this->getAuthor()->one();
+
+        return $user->username;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProgramTitle()
+    {
+        $program = $this->getProgram()->one();
+
+        return $program->title;
     }
 }

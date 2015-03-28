@@ -32,11 +32,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'content:ntext',
             'description:ntext',
-            'status',
-            'author_id',
-            'program_id',
-            'created_at',
-            'updated_at',
+            [
+                'attribute' => 'status',
+                'value' => $model->getTextStatus(),
+            ],
+            [
+                'attribute' => 'author_id',
+                'value' => $model->getAuthorName(),
+            ],
+            [
+                'attribute' => 'program_id',
+                'value' => $model->getProgramTitle(),
+            ],
+            'created_at:datetime',
+            'updated_at:datetime',
         ],
     ]) ?>
 
