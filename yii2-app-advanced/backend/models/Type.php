@@ -40,6 +40,18 @@ class Type extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public function fields()
+    {
+        return [
+            'id',
+            'title',
+            'description'
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [

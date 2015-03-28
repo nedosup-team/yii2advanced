@@ -40,6 +40,23 @@ class Project extends \yii\db\ActiveRecord
         return 'projects';
     }
 
+    public function fields()
+    {
+        $fields = parent::fields();
+        $fields['program'] = function () {
+            return $this->getProgram()->one();
+        };
+        $fields['author'] = function () {
+            return $this->getAuthor()->one();
+        };
+        $fields['types'] = function () {
+           return $this->getTypes()->all();
+        };
+
+        unset($fields['program_id'], $fields['author_id'], $fields['created_at'], $fields['updated_at']);
+        return $fields;
+    }
+
     /**
      * @inheritdoc
      */
