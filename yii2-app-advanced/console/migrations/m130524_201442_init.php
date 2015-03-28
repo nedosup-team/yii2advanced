@@ -28,15 +28,17 @@ class m130524_201442_init extends Migration
 
         $this->insert('{{%user}}', [
             'id' => 1,
-            'username' => 'ibndoom',
-            'auth_key' => 'kvpfzafmFKD6dnQbllQ2RV3UhkWJYToe',
-            'password_hash' => '$2y$13$lLe1drJIOcXx7pKKB9nSKuB9xqpbFTRxzOP8aLxcLS17NGVnVfVWe',
+            'username' => "helper",
+            'auth_key' => "aCq5qiPVKO5H4Yn3HzvatHx1Aj_RjUHo",
+            'password_hash' => '$2y$13$ptJMksESBfxZFz7XE4gZCey/JREZlKK0HDxrDuTOPnkkh.jjX3fNO',
             'password_reset_token' => NULL,
-            'email' => 'ibndoom@ya.ru',
-            'status' => 10,
-            'created_at' => 1427496238,
-            'updated_at' => 1427496238,
+            'email' => "helper@yii2.local",
+            'status' => 20,
+            'created_at' => time(),
+            'updated_at' => time(),
         ]);
+
+
     }
 
     public function down()
