@@ -34,14 +34,14 @@ AppAsset::register($this);
             $menuItems = [
                 ['label' => 'Home', 'url' => ['/site/index']],
             ];
-            if (\common\models\User::STATUS_ADMIN != Yii::$app->user->identity->status) {
+//            if (\common\models\User::STATUS_ADMIN != Yii::$app->user->identity->status) {
                 $menuItems[] = ['label' => 'Пользователи', 'url' => ['/users']];
                 $menuItems[] = ['label' => 'Программы', 'url' => ['/programs']];
                 $menuItems[] = ['label' => 'Проекты', 'url' => ['/projects']];
                 $menuItems[] = ['label' => 'Типы', 'url' => ['/types']];
                 $menuItems[] = ['label' => 'Новости', 'url' => ['/news']];
                 $menuItems[] = ['label' => 'Подписчики', 'url' => ['/subscribers']];
-            }
+//            }
             if (Yii::$app->user->isGuest) {
                 $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
             } else {
