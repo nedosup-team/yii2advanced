@@ -25,6 +25,18 @@ class m130524_201442_init extends Migration
             'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
             'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL',
         ], $tableOptions);
+
+        $this->insert('{{%user}}', [
+            'id' => 1,
+            'username' => 'ibndoom',
+            'auth_key' => 'kvpfzafmFKD6dnQbllQ2RV3UhkWJYToe',
+            'password_hash' => '$2y$13$lLe1drJIOcXx7pKKB9nSKuB9xqpbFTRxzOP8aLxcLS17NGVnVfVWe',
+            'password_reset_token' => NULL,
+            'email' => 'ibndoom@ya.ru',
+            'status' => 10,
+            'created_at' => 1427496238,
+            'updated_at' => 1427496238,
+        ]);
     }
 
     public function down()

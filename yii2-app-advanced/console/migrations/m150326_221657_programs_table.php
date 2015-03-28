@@ -20,7 +20,7 @@ class m150326_221657_programs_table extends Migration
             'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL',
         ], $tableOptions);
 
-        $this->addForeignKey("fk_program_project", "programs", "id", "projects", "program_id", "CASCADE", "RESTRICT");
+        $this->addForeignKey("fk_program_project", "projects", "program_id", "programs", "id", "CASCADE", "RESTRICT");
     }
 
     public function down()

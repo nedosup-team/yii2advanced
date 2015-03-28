@@ -23,7 +23,7 @@ class m150326_221557_news_table extends Migration
         ], $tableOptions);
 
         $this->createIndex('index_news_author', 'news', 'author_id', false);
-        $this->addForeignKey("fk_user_news", "user", "id", "news", "author_id", "CASCADE", "RESTRICT");
+        $this->addForeignKey("fk_news_user", "news", "author_id", "user", "id", "CASCADE", "RESTRICT");
     }
 
     public function down()

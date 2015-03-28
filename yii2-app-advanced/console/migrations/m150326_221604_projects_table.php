@@ -28,7 +28,7 @@ class m150326_221604_projects_table extends Migration
         $this->createIndex('index_project_program', 'projects', 'program_id', false);
 
         $this->addForeignKey("fk_news_project", "news", "project_id", "projects", "id", "CASCADE", "RESTRICT");
-        $this->addForeignKey("fk_user_project", "user", "id", "projects", "author_id", "CASCADE", "RESTRICT");
+        $this->addForeignKey("fk_user_project", "projects", "author_id", "user", "id", "CASCADE", "RESTRICT");
         $this->addForeignKey("fk_project_subscriber", "project_subscriber", "project_id", "projects", "id", "CASCADE", "RESTRICT");
         $this->addForeignKey("fk_type_project", "project_type", "project_id", "projects", "id", "CASCADE", "RESTRICT");
     }
