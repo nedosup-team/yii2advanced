@@ -12,8 +12,8 @@ use yii\helpers\ArrayHelper;
  * This is the model class for table "projects".
  *
  * @property integer $id
- * @property string $title
  * @property string $content
+ * @property string $title
  * @property string $description
  * @property integer $status
  * @property integer $author_id

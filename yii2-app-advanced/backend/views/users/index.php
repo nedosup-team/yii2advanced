@@ -25,10 +25,10 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'status',
                 'value' => function ($model, $key, $index, $column) {
-                    return Html::activeDropDownList($model, 'status',
+                    return Html::activeDropDownList($model, 'role',
                     [
-                        User::STATUS_ACTIVE => 'Пользователь',
-                        User::STATUS_ADMIN  => 'Администратор'
+                        User::ROLE_USER => 'Пользователь',
+                        User::ROLE_ADMIN  => 'Администратор'
                     ],
                     [
                         'data-id' => $model->id,
@@ -41,23 +41,23 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'format' => 'raw',
                 'filter' => [
-                    User::STATUS_ACTIVE => 'Пользователь',
-                    User::STATUS_ADMIN  => 'Администратор'
+                    User::ROLE_USER => 'Пользователь',
+                    User::ROLE_ADMIN  => 'Администратор'
                 ]
             ],
             [
                 'value' => function ($model, $key, $index, $column) {
                     /* @var User $model */
                     $html = Html::beginForm('/index.php?r=users/update&id='.$model->id);
-                    $html .= Html::input('hidden','User[status]',$model->status, ['id' => 'user_'.$model->id]);
+                    $html .= Html::input('hidden','User[role]',$model->status, ['id' => 'user_'.$model->id]);
                     $html .= Html::submitButton('Обновить', ['class' => 'btn btn-success']);
                     $html .= Html::endForm();
                     return $html;
                 },
                 'format' => 'raw',
                 'filter' => [
-                    User::STATUS_ACTIVE => 'Пользователь',
-                    User::STATUS_ADMIN  => 'Администратор'
+                    User::ROLE_USER => 'Пользователь',
+                    User::ROLE_ADMIN  => 'Администратор'
                 ]
             ],
         ],
