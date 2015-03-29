@@ -159,6 +159,14 @@ class Project extends \yii\db\ActiveRecord
     /**
      * @return array
      */
+    public function getSubscribersList()
+    {
+        return ArrayHelper::map($this->getSubscribers()->asArray()->all(), 'id', 'email');
+    }
+
+    /**
+     * @return array
+     */
     public function getTypesList()
     {
         return ArrayHelper::map(Type::find()->asArray()->all(), 'id', 'title');
