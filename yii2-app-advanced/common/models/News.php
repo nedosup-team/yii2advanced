@@ -3,7 +3,9 @@
 namespace common\models;
 
 use Yii;
+use yii\base\ModelEvent;
 use yii\behaviors\TimestampBehavior;
+use yii\db\AfterSaveEvent;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -112,5 +114,43 @@ class News extends \yii\db\ActiveRecord
     {
         $author = $this->getAuthor()->one();
         return $author->username;
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        $project = $this->getProject()->one();
+        $this->sendEmail($project->id, '');
+
+        $this->trigger($insert ? self::EVENT_AFTER_INSERT : self::EVENT_AFTER_UPDATE, new AfterSaveEvent([
+            'changedAttributes' => $changedAttributes
+        ]));
+    }
+
+    /**
+     * Sends Link to published News
+     *
+     * @return boolean whether the email was send
+     */
+    public function sendEmail($project_id, $news_id)
+    {
+        /* @var $project Project */
+        $project = Project::findOne([
+            'id' => $project_id,
+        ]);
+
+        $subscribers = $project->getSubscribersList();
+
+        if (count($subscribers)) {
+
+            foreach ($subscribers as $email) {
+                \Yii::$app->mailer->compose(['html' => 'News-html', 'text' => 'News-text'], ['project' => $project])
+                    ->setFrom([\Yii::$app->params['supportEmail'] => 'Новости проекта на Помогаторе 9000'])
+                    ->setTo($email)
+                    ->setSubject("Новости проекта на Помогаторе 9000")
+                    ->send();
+            }
+        }
+
+        return false;
     }
 }

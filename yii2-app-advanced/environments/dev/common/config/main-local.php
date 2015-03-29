@@ -10,11 +10,16 @@ return [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',
+                'username' => base64_decode('bmVkb3NpcC5zbXRwQGdtYWlsLmNvbQ=='),
+                'password' => base64_decode('MTIzd3N4Y2Rl'),
+                'port' => '587',
+                'encryption' => 'tls',
+            ],
             'viewPath' => '@common/mail',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'useFileTransport' => false,
         ],
     ],
 ];
