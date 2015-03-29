@@ -22,54 +22,27 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body>
-    <?php $this->beginBody() ?>
-    <div class="wrap">
-        <?php
-            NavBar::begin([
-                'brandLabel' => 'Помогатор 9000',
-                'brandUrl' => Yii::$app->homeUrl,
-                'options' => [
-                    'class' => 'navbar-inverse navbar-fixed-top',
-                ],
-            ]);
-            $menuItems = [
-                ['label' => 'Главная', 'url' => ['/site/index']],
-                ['label' => 'About', 'url' => ['/site/about']],
-                ['label' => 'Contact', 'url' => ['/site/contact']],
-            ];
-            if (Yii::$app->user->isGuest) {
-                $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-                $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-            } else {
-                $menuItems[] = [
-                    'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                    'url' => ['/site/logout'],
-                    'linkOptions' => ['data-method' => 'post']
-                ];
-            }
-            echo Nav::widget([
-                'options' => ['class' => 'navbar-nav navbar-right'],
-                'items' => $menuItems,
-            ]);
-            NavBar::end();
-        ?>
-
-        <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+<?php $this->beginBody() ?>
+<div class="global-wrap">
+    <div id="header">
+        <div class="logo"><img src="/images/logo.jpg" alt=""></div>
+        <div class="login">
+            <form action="#">
+                <label for="login">Логин</label>
+                <input type="text" name="" id="login">
+                <label for="password">Пароль</label>
+                <input type="password" name="" id="password">
+                <input type="submit" value="Войти">
+            </form>
         </div>
+        <div class="program-filter"><form action=""><label>Выберите программу</label><select name="" id=""></select></form></div>
+        <div class="project-filter"><form action=""><label>Выберите проект</label><select name="" id=""></select></form></div>
+        <div class="type-filter"><form action=""><label>Выберите тип помощи</label><select name="" id=""></select></form></div>
+
     </div>
-
-    <footer class="footer">
-        <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-        <p class="pull-right"><?= Yii::powered() ?></p>
-        </div>
-    </footer>
-
+    <?= Alert::widget() ?>
+    <?= $content ?>
+</div>
     <?php $this->endBody() ?>
 </body>
 </html>

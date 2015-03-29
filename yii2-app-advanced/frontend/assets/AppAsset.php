@@ -18,10 +18,12 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
+        'stylesheets/screen.css',
     ];
     public $js = [
-        'js/subscription.js'
+        'http://maps.google.com/maps/api/js?sensor=false',
+        'javascripts/vendor/select2.min.js',
+        'javascripts/scripts.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

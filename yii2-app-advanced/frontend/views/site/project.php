@@ -6,49 +6,39 @@ use yii\helpers\Html;
 $this->title = 'Проект - ' . $model->title;
 $this->params['breadcrumbs'][] = $model->title;
 ?>
-<script src="http://maps.google.com/maps/api/js?sensor=false"
-        type="text/javascript"></script>
-<div class="site-about">
-	<h1><?= Html::encode($model->title) ?></h1>
+<div class="right-part">
+	<div class="col-md-6"><h4>Новости проекта</h4></div>
+	<div class="col-md-6"><?= $this->render('subscription', ['model' => $model]) ?></div>
+	<?php
+	$news = $model->getNews()->all();
+	if (count($news)): ?>
+		<table class="table table-striped">
+			<?php foreach ($news as $item):
+				/* @var $item common\models\News */ ?>
+				<tr>
+					<td>
+						<h5><?= Html::encode($item->title) ?></h5>
 
-	<div class="row">
-		<div class="col-md-6">
-			<h4>Описание</h4>
+						<p><?= Html::encode($item->description) ?></p>
+					</td>
+				</tr>
+			<?php endforeach ?>
+		</table>
+	<?php endif ?>
+</div>
+<div class="left-part">
+	<div class="left-part-wrap">
+		<h4>Описание</h4>
 
-			<p><?= Html::encode($model->content); ?></p>
-			<h4>Адресс</h4>
+		<p><?= Html::encode($model->content); ?></p>
+		<h4>Адресс</h4>
 
-			<p>
-				<?= Html::a(Html::encode($model->address), "http://maps.google.com/maps?q=" . Html::encode($model->address) . "%40" . (float) $model->lat . "," . (float) $model->lng, ['target' => "_blank"]); ?>
-			</p>
+		<p>
+			<?= Html::a(Html::encode($model->address), "http://maps.google.com/maps?q=" . Html::encode($model->address) . "%40" . (float) $model->lat . "," . (float) $model->lng, ['target' => "_blank"]); ?>
+		</p>
 
-			<img
-				src="http://maps.google.com/maps/api/staticmap?center=<?= (float) $model->lat ?>,<?= (float) $model->lng ?>&zoom=16&size=400x400&sensor=false&markers=color:blue%7Clabel:A%7C<?= (float) $model->lat ?>,<?= (float) $model->lng ?>"
-				style="width: 400px; height: 400px;"/>
-
-
-		</div>
-		<div class="col-md-6">
-			<div class="col-md-6"><h4>Новости проекта</h4></div>
-			<div class="col-md-6"><?= $this->render('subscription', ['model' => $model]) ?></div>
-			<?php
-			$news = $model->getNews()->all();
-			if (count($news)): ?>
-				<table class="table table-striped">
-					<?php foreach ($news as $item):
-						/* @var $item common\models\News */ ?>
-						<tr>
-							<td>
-								<h5><?= Html::encode($item->title) ?></h5>
-
-								<p><?= Html::encode($item->description) ?></p>
-							</td>
-						</tr>
-					<?php endforeach ?>
-				</table>
-			<?php endif ?>
-		</div>
+		<img
+			src="http://maps.google.com/maps/api/staticmap?center=<?= (float) $model->lat ?>,<?= (float) $model->lng ?>&zoom=16&size=400x400&sensor=false&markers=color:blue%7Clabel:A%7C<?= (float) $model->lat ?>,<?= (float) $model->lng ?>"
+			style="width: 400px; height: 400px;"/>
 	</div>
-
-
 </div>
