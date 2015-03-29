@@ -17,5 +17,5 @@
     - memcached
     - mysql
     - phpmyadmin
-    - yii-advanced-project
     - sakila-db
+    - yii-advanced-project

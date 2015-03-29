@@ -17,3 +17,6 @@
    - { src: 'common-main-local.php', dest: '/var/www/yii2-app-advanced/common/config/main-local.php' }
    - { src: 'frontend-main-local.php', dest: '/var/www/yii2-app-advanced/frontend/config/main-local.php' }
    - { src: 'backend-main-local.php', dest: '/var/www/yii2-app-advanced/backend/config/main-local.php' }
+
+- name: migrate
+  shell: /var/www/yii2-app-advanced/yii migrate
