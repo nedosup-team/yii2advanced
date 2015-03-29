@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "subscribers".
@@ -25,12 +27,29 @@ class Subscriber extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+            [
+                'class' => \common\behaviors\ManyToManyBehavior::className(),
+                'relations' => [
+                    'project' => 'projects',
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
-            [['email', 'created_at', 'updated_at'], 'required'],
+            [['email', 'project'], 'required'],
             [['created_at', 'updated_at'], 'integer'],
-            [['email'], 'string', 'max' => 255]
+            [['email'], 'string', 'max' => 255],
+            [['project'], 'safe']
         ];
     }
 
@@ -45,5 +64,22 @@ class Subscriber extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProjects()
+    {
+        return $this->hasMany(Project::className(), ['id' => 'project_id'])
+            ->viaTable('project_subscriber', ['subscriber_id' => 'id']);
+    }
+
+    /**
+     * @return array
+     */
+    public function getProjectsList()
+    {
+        return ArrayHelper::map(Project::find()->asArray()->all(), 'id', 'title');
     }
 }

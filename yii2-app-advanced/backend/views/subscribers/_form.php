@@ -14,9 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => 255]) ?>
 
-    <?= $form->field($model, 'created_at:datetime')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at:datetime')->textInput() ?>
+    <?= $form->field($model, 'project')->checkboxList($model->getProjectsList()) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Изменить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

@@ -127,7 +127,7 @@ class Project extends \yii\db\ActiveRecord
      */
     public function getSubscribers()
     {
-        return $this->hasMany(Project::className(), ['project_id' => 'id'])
+        return $this->hasMany(Subscriber::className(), ['id' => 'subscriber_id'])
             ->viaTable('project_subscriber', ['project_id' => 'id']);
     }
 
@@ -178,9 +178,9 @@ class Project extends \yii\db\ActiveRecord
     public function getTextStatus()
     {
         $status = 'Активен';
-        if ($this::PROJECT_ACTIVE == $this->status) {
+       if ( $this::PROJECT_ACTIVE == $this->status ) {
             $status = 'Активен';
-        } elseif ($this::PROJECT_COMPLETED == $this->status) {
+        } elseif ($this::PROJECT_COMPLETED == $this->status ) {
             $status = 'Завершён';
         }
 
