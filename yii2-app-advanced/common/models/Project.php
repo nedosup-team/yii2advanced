@@ -12,9 +12,12 @@ use yii\helpers\ArrayHelper;
  * This is the model class for table "projects".
  *
  * @property integer $id
- * @property string $content
  * @property string $title
+ * @property string $content
  * @property string $description
+ * @property string $lat
+ * @property string $lng
+ * @property string $address
  * @property integer $status
  * @property integer $author_id
  * @property integer $program_id
@@ -80,7 +83,7 @@ class Project extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'required'],
-            [['content', 'description'], 'string'],
+            [['content', 'description', 'lat', 'lng', 'address'], 'string'],
             [['status', 'author_id', 'program_id'], 'integer'],
             [['title'], 'string', 'max' => 255],
             [['types_list'], 'safe']
@@ -99,6 +102,7 @@ class Project extends \yii\db\ActiveRecord
             'description' => 'Description',
             'program_id' => 'Программа',
             'types_list' => 'Типы помощи',
+            'address' => 'Адресс'
         ];
     }
 
@@ -167,7 +171,7 @@ class Project extends \yii\db\ActiveRecord
     {
         return ArrayHelper::map(News::find()->asArray()->all(), 'id', 'title', 'content', 'author_id', 'create_at');
     }
-
+    
     /**
      * @return string
      */

@@ -22,10 +22,25 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
+    <?= $form->field($model, 'address')->textInput(['maxlength' => 255, 'id' => 'input_address']) ?>
+
+    <button id="map_reset">Сброс</button>
+
+    <?= $form->field($model, 'lat')->hiddenInput()->label(false) ?>
+
+    <?= $form->field($model, 'lng')->hiddenInput()->label(false) ?>
+
+    <p id="map_container" style="width: 100%; height: 350px;"></p>
+
+    <?= $form->field($model, 'status')->hiddenInput(['value' => $model::PROJECT_ACTIVE])->label(false) ?>
+
+    <?= $form->field($model, 'author_id')->hiddenInput(['value' => Yii::$app->user->getId()])->label(false) ?>
+    
     <?= $form->field($model, 'status')->hiddenInput(['value' => $model::PROJECT_ACTIVE])->label(false) ?>
 
     <?= $form->field($model, 'author_id')->hiddenInput(['value' => Yii::$app->user->getId()])->label(false) ?>
 
+    
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Изменить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

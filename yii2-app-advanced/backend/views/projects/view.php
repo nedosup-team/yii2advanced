@@ -53,6 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'program_id',
                         'value' => $model->getProgramTitle(),
                     ],
+                    'address',
                     'created_at:datetime',
                     'updated_at:datetime',
                 ],

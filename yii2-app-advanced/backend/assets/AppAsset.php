@@ -15,12 +15,17 @@ use yii\web\AssetBundle;
  */
 class AppAsset extends AssetBundle
 {
+    public $publishOptions = ['forceCopy' => true];
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
+        'jquery-ui/jquery-ui.min.css',
         'css/site.css',
     ];
     public $js = [
+        'jquery-ui/jquery-ui.min.js',
+        '//maps.google.com/maps/api/js?sensor=false',
+        'js/map-field.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
