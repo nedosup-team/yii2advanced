@@ -26,7 +26,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 <div class="global-wrap">
     <div id="header">
-        <div class="logo"><img src="/images/logo.jpg" alt=""></div>
+        <div class="logo"><img src="/images/logo.png" alt=""></div>
 
         <div class="login">
             <?php if (Yii::$app->user->isGuest) : ?>
