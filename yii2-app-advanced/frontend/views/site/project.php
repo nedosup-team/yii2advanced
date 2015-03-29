@@ -3,6 +3,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model \common\models\Project */
+$this->title = 'Проект - ' . $model->title;
 $this->params['breadcrumbs'][] = $model->title;
 ?>
 <script src="http://maps.google.com/maps/api/js?sensor=false"
