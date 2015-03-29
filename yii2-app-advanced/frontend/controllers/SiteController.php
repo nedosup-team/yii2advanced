@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Project;
 use Yii;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
@@ -12,6 +13,7 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\NotFoundHttpException;
 
 /**
  * Site controller
@@ -165,6 +167,16 @@ class SiteController extends Controller
         }
 
         return $this->render('resetPassword', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionProject($id)
+    {
+        if (($model = Project::findOne($id)) == null) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+        return $this->render('project',[
             'model' => $model,
         ]);
     }

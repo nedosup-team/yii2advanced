@@ -178,9 +178,9 @@ class Project extends \yii\db\ActiveRecord
     public function getTextStatus()
     {
         $status = 'Активен';
-       if ( $this::PROJECT_ACTIVE == $this->status ) {
+        if ($this::PROJECT_ACTIVE == $this->status) {
             $status = 'Активен';
-        } elseif ($this::PROJECT_COMPLETED == $this->status ) {
+        } elseif ($this::PROJECT_COMPLETED == $this->status) {
             $status = 'Завершён';
         }
 
