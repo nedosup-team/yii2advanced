@@ -20,5 +20,6 @@ use yii\widgets\ActiveForm,
 	<?php $user = Yii::$app->getUser()->getIdentity(); ?>
 	<input type="email" class="form-control input-sm" name="email" value="<?= $user->email ?>">
 <?php endif; ?>
+<input type="hidden" name="project_id" value="<?= $model->id ?>">
 <?= Html::submitButton('Подписаться', ['class' => 'btn btn-default btn-xs', 'name' => 'login-button']) ?>
 <?php ActiveForm::end(); ?>

@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $model->title;
 		</div>
 		<div class="col-md-6">
 			<div class="col-md-6"><h4>Новости проекта</h4></div>
-			<div class="col-md-6"><?= $this->render('subscription') ?></div>
+			<div class="col-md-6"><?= $this->render('subscription', ['model' => $model]) ?></div>
 			<?php
 			$news = $model->getNews()->all();
 			if (count($news)): ?>
