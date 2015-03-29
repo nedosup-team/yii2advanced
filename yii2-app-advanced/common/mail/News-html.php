@@ -4,7 +4,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $project common\models\Project */
 
-$resetLink = Yii::$app->urlManagerFrontEnd->createAbsoluteUrl(['site/project', 'id' => $project->id]);
+$resetLink = Yii::$app->urlManager->createAbsoluteUrl(['site/project', 'id' => $project->id]);
 ?>
 <div class="news">
 
