@@ -3,9 +3,9 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=sakila',
-            'username' => 'yii',
-            'password' => 'yii',
+            'dsn' => 'mysql:host=localhost;dbname=magentodb',
+            'username' => 'magentouser',
+            'password' => 'password',
             'charset' => 'utf8',
         ],
         'mailer' => [

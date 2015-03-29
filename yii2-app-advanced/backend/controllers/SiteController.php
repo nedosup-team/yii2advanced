@@ -65,7 +65,7 @@ class SiteController extends Controller
                 'model' => $model,
             ]);
         } else {
-            return $this->render('index');
+            return $this->redirect(['projects/index']);
         }
     }
 
