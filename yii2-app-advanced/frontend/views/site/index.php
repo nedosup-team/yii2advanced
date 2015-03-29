@@ -3,7 +3,7 @@
 $this->title = 'My Yii Application';
 ?>
 <div class="right-part">
-    <div id="map"></div>
+    <div class="right-part-wrap" id="map"></div>
 </div>
 <div class="left-part">
     <div class="left-part-wrap">

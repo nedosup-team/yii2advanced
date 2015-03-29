@@ -6,24 +6,32 @@ use yii\bootstrap\ActiveForm;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \frontend\models\SignupForm */
 
-$this->title = 'Signup';
+$this->title                   = 'Регистрация';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-signup">
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="right-part">
+	<div class="right-part-wrap" id="map"></div>
+</div>
+<div class="left-part">
+	<div class="left-part-wrap">
 
-    <p>Please fill out the following fields to signup:</p>
+		<div class="site-signup">
+			<h1><?= Html::encode($this->title) ?></h1>
 
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
-                <?= $form->field($model, 'username') ?>
-                <?= $form->field($model, 'email') ?>
-                <?= $form->field($model, 'password')->passwordInput() ?>
-                <div class="form-group">
-                    <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
-                </div>
-            <?php ActiveForm::end(); ?>
-        </div>
-    </div>
+			<p>Заполните данные для регистрации:</p>
+
+			<div class="row">
+				<div class="col-lg-12">
+					<?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
+					<?= $form->field($model, 'username') ?>
+					<?= $form->field($model, 'email') ?>
+					<?= $form->field($model, 'password')->passwordInput() ?>
+					<div class="form-group">
+						<?= Html::submitButton('Регистрация', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+					</div>
+					<?php ActiveForm::end(); ?>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

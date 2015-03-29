@@ -7,24 +7,26 @@ $this->title = 'Проект - ' . $model->title;
 $this->params['breadcrumbs'][] = $model->title;
 ?>
 <div class="right-part">
-	<div class="col-md-6"><h4>Новости проекта</h4></div>
-	<div class="col-md-6"><?= $this->render('subscription', ['model' => $model]) ?></div>
-	<?php
-	$news = $model->getNews()->all();
-	if (count($news)): ?>
-		<table class="table table-striped">
-			<?php foreach ($news as $item):
-				/* @var $item common\models\News */ ?>
-				<tr>
-					<td>
-						<h5><?= Html::encode($item->title) ?></h5>
+	<div class="right-part-wrap">
+		<div class="col-md-6"><h4>Новости проекта</h4></div>
+		<div class="col-md-6"><?= $this->render('subscription', ['model' => $model]) ?></div>
+		<?php
+		$news = $model->getNews()->all();
+		if (count($news)): ?>
+			<table class="table table-striped">
+				<?php foreach ($news as $item):
+					/* @var $item common\models\News */ ?>
+					<tr>
+						<td>
+							<h5><?= Html::encode($item->title) ?></h5>
 
-						<p><?= Html::encode($item->description) ?></p>
-					</td>
-				</tr>
-			<?php endforeach ?>
-		</table>
-	<?php endif ?>
+							<p><?= Html::encode($item->description) ?></p>
+						</td>
+					</tr>
+				<?php endforeach ?>
+			</table>
+		<?php endif ?>
+	</div>
 </div>
 <div class="left-part">
 	<div class="left-part-wrap">
