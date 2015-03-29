@@ -77,8 +77,13 @@ class NewsController extends Controller
     {
         $model = new News();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $post = Yii::$app->request->post();
+        if ($model->load($post) && $model->save()) {
+            if (isset($post['News']['in_project']) && 1 == $post['News']['in_project']) {
+                return $this->redirect(['projects/view', 'id' => $model->project_id]);
+            } else {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         } else {
             return $this->render('create', [
                 'model' => $model,

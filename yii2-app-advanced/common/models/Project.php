@@ -161,6 +161,14 @@ class Project extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return array
+     */
+    public function getNewsList()
+    {
+        return ArrayHelper::map(News::find()->asArray()->all(), 'id', 'title', 'content', 'author_id', 'create_at');
+    }
+
+    /**
      * @return string
      */
     public function getTextStatus()

@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "news".
@@ -30,10 +32,26 @@ class News extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+            [
+                'class' => \common\behaviors\ManyToManyBehavior::className(),
+                'relations' => [
+                    'types_list' => 'types',
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
-            [['title', 'created_at', 'updated_at'], 'required'],
+            [['title'], 'required'],
             [['description'], 'string'],
             [['project_id', 'author_id', 'created_at', 'updated_at'], 'integer'],
             [['title'], 'string', 'max' => 255]
@@ -47,12 +65,10 @@ class News extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'description' => 'Description',
-            'project_id' => 'Project ID',
-            'author_id' => 'Author ID',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'title' => 'Название',
+            'description' => 'Описание',
+            'project_id' => 'Проект',
+            'created_at' => 'Создан',
         ];
     }
 
@@ -62,5 +78,39 @@ class News extends \yii\db\ActiveRecord
     public function getAuthor()
     {
         return $this->hasOne(User::className(), ['id' => 'author_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProject()
+    {
+        return $this->hasOne(Project::className(), ['id' => 'project_id']);
+    }
+
+    /**
+     * @return array
+     */
+    public function getProjectsList()
+    {
+        return ArrayHelper::map(Project::find()->asArray()->all(), 'id', 'title');
+    }
+
+    /**
+     * @return string
+     */
+    public function getProjectTitle()
+    {
+        $project = $this->getProject()->one();
+        return $project->title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthorName()
+    {
+        $author = $this->getAuthor()->one();
+        return $author->username;
     }
 }

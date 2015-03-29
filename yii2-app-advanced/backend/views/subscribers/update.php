@@ -8,7 +8,7 @@ use yii\helpers\Html;
 $this->title = 'Update Subscriber: ' . ' ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Subscribers', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Изменить';
 ?>
 <div class="subscriber-update">
 
